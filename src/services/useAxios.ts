@@ -1,20 +1,23 @@
 import { useState, useCallback } from 'react'
 
-import axios, { AxiosRequestConfig } from 'axios'
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 const DEFAULT_CONFIG: AxiosRequestConfig = {
-  baseURL: 'https://jsonplaceholder.typicode.com',
+  baseURL: 'https://randomuser.me/',
   // ... others config
 }
 
-export const useAxios = (config: AxiosRequestConfig) => {
-  const [response, setResponse] = useState(undefined)
+export const useAxios = <T>(config: AxiosRequestConfig) => {
+  const [response, setResponse] = useState<T>(undefined)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
 
   const fetchData = useCallback(async () => {
     try {
-      const result = await axios.request({ ...DEFAULT_CONFIG, ...config })
+      const result = await axios.request<T, AxiosResponse<T>>({
+        ...DEFAULT_CONFIG,
+        ...config,
+      })
       setResponse(result.data)
     } catch (err) {
       setError(err)

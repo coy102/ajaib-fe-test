@@ -1,10 +1,11 @@
 import { AxiosRequestConfig } from 'axios'
 
+import { UserResponse } from '../types'
 import { useAxios } from '../useAxios'
 
 export const useGetUsers = (config: AxiosRequestConfig = {}) =>
-  useAxios({
+  useAxios<UserResponse>({
     ...config,
     method: 'GET',
-    url: '/posts',
+    url: '/api/',
   })
