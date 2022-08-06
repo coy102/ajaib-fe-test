@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 import { ColDef } from '~/components/CustomTable'
 import { GetUsersParam } from '~/services/hooks/users'
 
@@ -37,7 +39,6 @@ export const columnsTable: ColDef[] = [
     field: 'registered',
     headerName: 'Registered',
     sorting: true,
-    renderCell: ({ registered }) =>
-      `${registered.date} - age: ${registered.age}`,
+    renderCell: ({ registered }) => dayjs(registered.date).format('D MMM YYYY'),
   },
 ]

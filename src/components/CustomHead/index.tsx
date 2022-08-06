@@ -1,3 +1,5 @@
+import { memo } from 'react'
+
 import Head from 'next/head'
 
 import { META_TAGS } from '~/config/constants'
@@ -25,4 +27,4 @@ const CustomHead = ({
   </Head>
 )
 
-export default CustomHead
+export default memo(CustomHead)

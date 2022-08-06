@@ -1,12 +1,13 @@
 import { memo } from 'react'
 
 import { Box, Pagination } from '@mui/material'
+import dynamic from 'next/dynamic'
 
-import CustomTable from '~/components/CustomTable'
-
-import FilterBox from './FilterBox'
 import { columnsTable } from './helper'
 import useHooks from './hooks'
+
+const FilterBox = dynamic(() => import('./FilterBox'))
+const CustomTable = dynamic(() => import('~/components/CustomTable'))
 
 const Users = () => {
   const {

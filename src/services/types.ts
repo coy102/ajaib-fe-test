@@ -6,7 +6,6 @@ export interface Name {
 
 export interface Registered {
   date: Date
-  age: number
 }
 
 export interface Result {

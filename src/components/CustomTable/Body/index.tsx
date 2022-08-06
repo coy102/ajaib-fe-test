@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import { TableBody, TableCell, TableRow } from '@mui/material'
+import uniqid from 'uniqid'
 
 import EmptyState from '~/components/Message/EmptyState'
 import LoadingState from '~/components/Message/LoadingState'
@@ -49,7 +50,7 @@ function Body({
   return (
     <TableBody>
       {transformedDataSource?.map((rowData) => (
-        <TableRow hover>
+        <TableRow key={uniqid()} hover>
           {columns.map((col) => {
             const value = rowData[col.field]
             return (
@@ -66,4 +67,4 @@ function Body({
   )
 }
 
-export default Body
+export default memo(Body)

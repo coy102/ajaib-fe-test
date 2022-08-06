@@ -1,3 +1,5 @@
+import { memo } from 'react'
+
 import { TableHead, TableRow, TableSortLabel } from '@mui/material'
 
 import { HeadCell, VisuallyHidden } from './style'
@@ -64,4 +66,4 @@ const EnhancedTableHead = ({
   )
 }
 
-export default EnhancedTableHead
+export default memo(EnhancedTableHead)

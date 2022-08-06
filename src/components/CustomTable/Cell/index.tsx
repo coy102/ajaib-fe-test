@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react'
 
 import styled from '@emotion/styled'
 import { Box, Typography } from '@mui/material'
@@ -27,4 +27,4 @@ const TableCell = ({ bold = false, children, size = 'large' }: Props) => (
   </StyledCell>
 )
 
-export default TableCell
+export default memo(TableCell)
