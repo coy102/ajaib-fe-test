@@ -1,6 +1,6 @@
 import { memo } from 'react'
 
-import { Box } from '@mui/material'
+import { Box, Pagination } from '@mui/material'
 
 import CustomTable from '~/components/CustomTable'
 
@@ -10,9 +10,11 @@ import useHooks from './hooks'
 
 const Users = () => {
   const {
+    currentPage,
     debouncedHandleChangeSearch,
     gender,
     handleChangeGender,
+    handleChangePage,
     loading,
     memoUsers,
   } = useHooks()
@@ -30,6 +32,13 @@ const Users = () => {
         loading={loading}
         sticky
       />
+      <Box my={5} display="flex" flexDirection="row-reverse">
+        <Pagination
+          count={memoUsers?.info?.results}
+          page={currentPage}
+          onChange={handleChangePage}
+        />
+      </Box>
     </Box>
   )
 }

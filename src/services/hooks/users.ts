@@ -4,17 +4,19 @@ import { UserResponse } from '../types'
 import { useAxios } from '../useAxios'
 
 export interface GetUsersParam {
-  results?: number
+  page: number
+  results: number
   keyword?: string
   gender?: string
 }
 
 export const useGetUsers = ({
   results,
+  page,
   keyword = '',
   gender = '',
 }: GetUsersParam) => {
-  let url = `/api/?results=${results}`
+  let url = `/api/?results=${results}&page=${page}`
 
   if (keyword) {
     url += `&keyword=${keyword}`
@@ -31,7 +33,7 @@ export const useGetUsers = ({
 
   useEffect(() => {
     fetchData()
-  }, [results, keyword, gender])
+  }, [results, keyword, gender, page])
 
   return {
     data,

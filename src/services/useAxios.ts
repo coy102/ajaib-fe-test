@@ -10,10 +10,11 @@ const DEFAULT_CONFIG: AxiosRequestConfig = {
 export const useAxios = <T>(baseConfig: AxiosRequestConfig) => {
   const [response, setResponse] = useState<T>(undefined)
   const [error, setError] = useState('')
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   const fetchData = useCallback(async () => {
     try {
+      setLoading(true)
       const result = await axios.request<T, AxiosResponse<T>>({
         ...DEFAULT_CONFIG,
         ...baseConfig,

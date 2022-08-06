@@ -3,6 +3,7 @@ import { GetUsersParam } from '~/services/hooks/users'
 
 export const DEFAULT_PARAM_USERS: GetUsersParam = {
   results: 10,
+  page: 1,
 }
 
 export const columnsTable: ColDef[] = [

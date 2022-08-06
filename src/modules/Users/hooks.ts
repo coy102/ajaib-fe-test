@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { debounce } from 'lodash'
+import { useRouter } from 'next/dist/client/router'
 
 import { GENDER_OPTIONS } from '~/config/constants'
 import { useGetUsers } from '~/services/hooks/users'
@@ -11,10 +12,15 @@ const useHooks = () => {
   const [search, setSearch] = useState('')
   const [gender, setGender] = useState(GENDER_OPTIONS[0]) // Default value "All"
 
+  const { push, query } = useRouter()
+
+  const currentPage = useMemo(() => Number(query?.page) || 1, [query])
+
   // init api get random users
   const { data } = useGetUsers({
     ...DEFAULT_PARAM_USERS,
     keyword: search,
+    page: currentPage,
     gender,
   })
 
@@ -43,6 +49,11 @@ const useHooks = () => {
     []
   )
 
+  // handle change page option
+  const handleChangePage = useCallback((_, page) => {
+    push(`/?page=${page}`)
+  }, [])
+
   useEffect(
     () => () => {
       // clear debounce on unmount
@@ -53,9 +64,11 @@ const useHooks = () => {
 
   return {
     loading: data.loading,
+    currentPage,
     debouncedHandleChangeSearch,
     gender,
     handleChangeGender,
+    handleChangePage,
     memoUsers,
     search,
   }
