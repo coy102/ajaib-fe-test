@@ -7,5 +7,5 @@ export const useGetUsers = (config: AxiosRequestConfig = {}) =>
   useAxios<UserResponse>({
     ...config,
     method: 'GET',
-    url: '/api/',
+    url: '/api/?page=1&results=10',
   })

@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { TableBody, TableCell, TableRow } from '@mui/material'
-import shortid from 'shortid'
 
 import EmptyState from '~/components/Message/EmptyState'
 import LoadingState from '~/components/Message/LoadingState'
@@ -50,20 +49,18 @@ function Body({
   return (
     <TableBody>
       {transformedDataSource?.map((rowData) => (
-        <React.Fragment key={shortid.generate()}>
-          <TableRow hover>
-            {columns.map((col) => {
-              const value = rowData[col.field]
-              return (
-                <TableCell key={col.field} align={col.align}>
-                  <Cell size="small">
-                    {col.renderCell ? col.renderCell(rowData) : value}
-                  </Cell>
-                </TableCell>
-              )
-            })}
-          </TableRow>
-        </React.Fragment>
+        <TableRow hover>
+          {columns.map((col) => {
+            const value = rowData[col.field]
+            return (
+              <TableCell key={col.field} align={col.align}>
+                <Cell size="small">
+                  {col.renderCell ? col.renderCell(rowData) : value}
+                </Cell>
+              </TableCell>
+            )
+          })}
+        </TableRow>
       ))}
     </TableBody>
   )

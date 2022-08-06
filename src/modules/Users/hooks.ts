@@ -12,6 +12,7 @@ const useHooks = () => {
   const memoUsers = useMemo(() => data?.response, [data])
 
   return {
+    loading: data.loading,
     memoUsers,
   }
 }
