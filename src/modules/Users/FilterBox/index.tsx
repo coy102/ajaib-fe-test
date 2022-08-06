@@ -1,7 +1,7 @@
 import { memo } from 'react'
 
 import SearchIcon from '@mui/icons-material/Search'
-import { Box, MenuItem, TextField } from '@mui/material'
+import { Box, Button, MenuItem, TextField } from '@mui/material'
 
 import { GENDER_OPTIONS } from '~/config/constants'
 
@@ -9,16 +9,22 @@ interface Props {
   gender: string
   handleChangeGender: (e) => void
   handleChangeSearch: (e) => void
+  handleClickResetFilter: () => void
+  searchRef: any
 }
 
 const FilterBox = ({
   gender,
   handleChangeGender,
   handleChangeSearch,
+  handleClickResetFilter,
+  searchRef,
 }: Props) => (
-  <Box display="flex" my={5}>
+  <Box display="flex" alignItems="center" my={5}>
     <Box>
       <TextField
+        inputRef={searchRef}
+        size="small"
         label="Search"
         name="search"
         id="input-search"
@@ -31,6 +37,7 @@ const FilterBox = ({
     </Box>
     <Box mx={3}>
       <TextField
+        size="small"
         name="search"
         id="input-search"
         variant="outlined"
@@ -46,7 +53,9 @@ const FilterBox = ({
         ))}
       </TextField>
     </Box>
+    <Box>
+      <Button onClick={handleClickResetFilter}>Reset Filter</Button>
+    </Box>
   </Box>
 )
-
 export default memo(FilterBox)

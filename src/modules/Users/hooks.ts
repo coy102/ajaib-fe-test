@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { debounce } from 'lodash'
 import { useRouter } from 'next/dist/client/router'
@@ -6,18 +6,16 @@ import { useRouter } from 'next/dist/client/router'
 import { GENDER_OPTIONS } from '~/config/constants'
 import { useGetUsers } from '~/services/hooks/users'
 
-import { DEFAULT_PARAM_USERS } from './helper'
+import { DEFAULT_PARAM_USERS, DEFAULT_SORTING, SortingState } from './helper'
 
 const useHooks = () => {
+  const allGender = GENDER_OPTIONS[0]
+
   const [search, setSearch] = useState('')
-  const [gender, setGender] = useState(GENDER_OPTIONS[0]) // Default value "All"
-  const [sorting, setSorting] = useState<{
-    orderBy: string
-    order?: 'asc' | 'desc'
-  }>({
-    orderBy: '',
-    order: 'asc',
-  })
+  const [gender, setGender] = useState(allGender) // Default value "All"
+  const [sorting, setSorting] = useState<SortingState>(DEFAULT_SORTING)
+
+  const searchRef = useRef(null)
 
   const { push, query } = useRouter()
 
@@ -38,7 +36,13 @@ const useHooks = () => {
   // handle search
   const handleChangeSearch = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setSearch(e.target.value)
+      const keyword = e.target.value
+      setSearch(keyword)
+
+      if (keyword) {
+        // reset parameter when keyword is not empty
+        push(`/?page=1`)
+      }
     },
     []
   )
@@ -75,6 +79,15 @@ const useHooks = () => {
     [sorting]
   )
 
+  // handle reset all filter (search and gender)
+  const handleClickResetFilter = useCallback(() => {
+    // becouse we are using uncontroller input, we need to reset the value using ref
+    searchRef.current.value = ''
+    setSearch('')
+    setGender(allGender)
+    setSorting(DEFAULT_SORTING)
+  }, [])
+
   useEffect(
     () => () => {
       // clear debounce on unmount
@@ -90,9 +103,10 @@ const useHooks = () => {
     gender,
     handleChangeGender,
     handleChangePage,
+    handleClickResetFilter,
     handleRequestSort,
     memoUsers,
-    search,
+    searchRef,
     sorting,
   }
 }

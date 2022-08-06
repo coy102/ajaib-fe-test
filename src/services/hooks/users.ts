@@ -24,10 +24,6 @@ export const useGetUsers = ({
 }: GetUsersParam) => {
   let url = `/api/?results=${results}&page=${page}`
 
-  if (keyword) {
-    url += `&keyword=${keyword}`
-  }
-
   if (gender && gender !== 'All') {
     url += `&gender=${gender.toLowerCase()}`
   }
