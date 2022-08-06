@@ -1,4 +1,9 @@
 import { ColDef } from '~/components/CustomTable'
+import { GetUsersParam } from '~/services/hooks/users'
+
+export const DEFAULT_PARAM_USERS: GetUsersParam = {
+  results: 50,
+}
 
 export const columnsTable: ColDef[] = [
   {

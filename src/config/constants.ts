@@ -1,4 +1,4 @@
-export const graphQLHost = process.env.NEXT_PUBLIC_GRAPHQL_HOST
+export const GENDER_OPTIONS = ['All', 'Female', 'Male']
 
 const META = {
   image: '',

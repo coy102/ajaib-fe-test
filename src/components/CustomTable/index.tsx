@@ -1,23 +1,16 @@
-import React from 'react'
+import React, { memo } from 'react'
 
-import { Box, Paper, Table, TableContainer } from '@mui/material'
+import { Box, Paper, Table } from '@mui/material'
 
 import TableBody from './Body'
 import CustomTableHead, { ColDefProps } from './Head'
 import useHooks from './hooks'
-
-// interface PaginationOptions {
-//   active?: boolean
-//   current?: number
-//   totalPage?: number
-//   onChangePage?(e: any, newPage: any): void
-//   onRowsPerPageChange?: (value) => void
-//   rowsPerPage?: number
-// }
+import { StyledTableContainer } from './style'
 
 interface Props {
   columns: Array<ColDefProps>
   data: Array<any>
+  height?: number | string
   loading?: boolean
   size?: 'small' | 'medium'
   sticky?: boolean
@@ -26,6 +19,7 @@ interface Props {
 const CustomTable = ({
   columns,
   data = [],
+  height = 400,
   loading = false,
   size = 'medium',
   sticky = false,
@@ -40,32 +34,30 @@ const CustomTable = ({
   const isNotEmpty = transformedDataSource.length > 0
 
   return (
-    <>
-      <Box position="relative">
-        <Paper>
-          <TableContainer>
-            <Table size={size} stickyHeader={sticky} aria-label="sticky table">
-              <CustomTableHead
-                order={order}
-                columnHead={columns}
-                orderBy={orderBy}
-                onRequestSort={handleRequestSort}
-              />
-              <TableBody
-                colSpan={columns.length}
-                columns={columns}
-                isNotEmpty={isNotEmpty}
-                loading={loading}
-                transformedDataSource={transformedDataSource}
-              />
-            </Table>
-          </TableContainer>
-        </Paper>
-      </Box>
-    </>
+    <Box position="relative">
+      <Paper>
+        <StyledTableContainer sticky={sticky} height={height}>
+          <Table size={size} stickyHeader={sticky} aria-label="sticky table">
+            <CustomTableHead
+              order={order}
+              columnHead={columns}
+              orderBy={orderBy}
+              onRequestSort={handleRequestSort}
+            />
+            <TableBody
+              colSpan={columns.length}
+              columns={columns}
+              isNotEmpty={isNotEmpty}
+              loading={loading}
+              transformedDataSource={transformedDataSource}
+            />
+          </Table>
+        </StyledTableContainer>
+      </Paper>
+    </Box>
   )
 }
 
 export type ColDef = ColDefProps
 
-export default CustomTable
+export default memo(CustomTable)

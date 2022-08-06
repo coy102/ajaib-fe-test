@@ -1,11 +1,12 @@
-import { AxiosRequestConfig } from 'axios'
-
 import { UserResponse } from '../types'
 import { useAxios } from '../useAxios'
 
-export const useGetUsers = (config: AxiosRequestConfig = {}) =>
+export interface GetUsersParam {
+  results: number
+}
+
+export const useGetUsers = ({ results }: GetUsersParam) =>
   useAxios<UserResponse>({
-    ...config,
     method: 'GET',
-    url: '/api/?page=1&results=10',
+    url: `/api/?results=${results}`,
   })
