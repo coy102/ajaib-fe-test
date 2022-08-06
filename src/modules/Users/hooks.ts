@@ -11,6 +11,13 @@ import { DEFAULT_PARAM_USERS } from './helper'
 const useHooks = () => {
   const [search, setSearch] = useState('')
   const [gender, setGender] = useState(GENDER_OPTIONS[0]) // Default value "All"
+  const [sorting, setSorting] = useState<{
+    orderBy: string
+    order?: 'asc' | 'desc'
+  }>({
+    orderBy: '',
+    order: 'asc',
+  })
 
   const { push, query } = useRouter()
 
@@ -19,6 +26,7 @@ const useHooks = () => {
   // init api get random users
   const { data } = useGetUsers({
     ...DEFAULT_PARAM_USERS,
+    ...sorting,
     keyword: search,
     page: currentPage,
     gender,
@@ -54,12 +62,25 @@ const useHooks = () => {
     push(`/?page=${page}`)
   }, [])
 
+  // handle click sorting column
+  const handleRequestSort = useCallback(
+    (_, property) => {
+      const isAsc = sorting.orderBy === property && sorting.order === 'asc'
+
+      setSorting({
+        orderBy: property,
+        order: isAsc ? 'desc' : 'asc',
+      })
+    },
+    [sorting]
+  )
+
   useEffect(
     () => () => {
       // clear debounce on unmount
       debouncedHandleChangeSearch.cancel()
     },
-    [search]
+    []
   )
 
   return {
@@ -69,8 +90,10 @@ const useHooks = () => {
     gender,
     handleChangeGender,
     handleChangePage,
+    handleRequestSort,
     memoUsers,
     search,
+    sorting,
   }
 }
 

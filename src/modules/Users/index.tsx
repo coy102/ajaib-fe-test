@@ -15,8 +15,10 @@ const Users = () => {
     gender,
     handleChangeGender,
     handleChangePage,
+    handleRequestSort,
     loading,
     memoUsers,
+    sorting,
   } = useHooks()
 
   return (
@@ -30,6 +32,9 @@ const Users = () => {
         columns={columnsTable}
         data={memoUsers?.results}
         loading={loading}
+        order={sorting.order}
+        orderBy={sorting.orderBy}
+        handleRequestSort={handleRequestSort}
         sticky
       />
       <Box my={5} display="flex" flexDirection="row-reverse">

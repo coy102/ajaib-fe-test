@@ -1,5 +1,10 @@
 export const GENDER_OPTIONS = ['All', 'Female', 'Male']
 
+export const REQUESTED_ORDER_MAPPING = {
+  asc: 'ascend',
+  desc: 'descend',
+}
+
 const META = {
   image: '',
   title: 'Ajaib fe test',
