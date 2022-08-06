@@ -5,11 +5,7 @@ module.exports = {
   },
   automock: false,
   rootDir: '../',
-  coveragePathIgnorePatterns: [
-    '<rootDir>/node_modules',
-    '<rootDir>/src/gqlcodegen',
-    '<rootDir>/tests',
-  ],
+  coveragePathIgnorePatterns: ['<rootDir>/node_modules', '<rootDir>/tests'],
   coverageThreshold: {
     global: {
       statements: 50,
@@ -20,7 +16,7 @@ module.exports = {
   },
   moduleDirectories: ['node_modules', '<rootDir>/src'],
   moduleNameMapper: {
-    '~/mocks/(.*)$': '<rootDir>/mocks/$1',
+    '~/mocks/(.*)$': '<rootDir>/__mocks__/$1',
     '~/public/(.*)$': '<rootDir>/public/$1',
     '~/tests/(.*)$': '<rootDir>/tests/$1',
     '~(.*)$': '<rootDir>/src/$1',
@@ -28,7 +24,7 @@ module.exports = {
       '<rootDir>/scripts/mocks/image.js',
   },
   coverageReporters: ['html', 'lcov', 'cobertura'],
-  setupFiles: ['<rootDir>/tests/mocks.ts'],
+  // setupFiles: ['<rootDir>/tests/mocks.ts'],
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|js?|tsx?|ts?)$',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$'],

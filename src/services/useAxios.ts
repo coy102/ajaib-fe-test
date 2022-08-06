@@ -19,6 +19,7 @@ export const useAxios = <T>(baseConfig: AxiosRequestConfig) => {
         ...DEFAULT_CONFIG,
         ...baseConfig,
       })
+
       setResponse(result.data)
     } catch (err) {
       setError(err)
