@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { debounce } from 'lodash'
-import { useRouter } from 'next/dist/client/router'
+import { useRouter } from 'next/router'
 
 import { GENDER_OPTIONS } from '~/config/constants'
 import { useGetUsers } from '~/services/hooks/users'
@@ -31,14 +31,13 @@ const useHooks = () => {
   })
 
   // memoized random users data
-  const memoUsers = useMemo(() => data?.response, [data])
+  const memoUsers = useMemo(() => data?.response || {}, [data])
 
   // handle search
   const handleChangeSearch = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const keyword = e.target.value
       setSearch(keyword)
-
       if (keyword) {
         // reset parameter when keyword is not empty
         push(`/?page=1`)
