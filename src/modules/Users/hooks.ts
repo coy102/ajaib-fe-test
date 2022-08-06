@@ -31,7 +31,7 @@ const useHooks = () => {
   })
 
   // memoized random users data
-  const memoUsers = useMemo(() => data?.response || {}, [data])
+  const memoUsers = useMemo(() => data?.response, [data])
 
   // handle search
   const handleChangeSearch = useCallback(
