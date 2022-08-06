@@ -12,8 +12,10 @@ const useHooks = () => {
   const [gender, setGender] = useState(GENDER_OPTIONS[0]) // Default value "All"
 
   // init api get random users
-  const { fetchData, data } = useGetUsers({
+  const { data } = useGetUsers({
     ...DEFAULT_PARAM_USERS,
+    keyword: search,
+    gender,
   })
 
   // memoized random users data
@@ -41,14 +43,13 @@ const useHooks = () => {
     []
   )
 
-  useEffect(() => {
-    fetchData()
-
-    return () => {
+  useEffect(
+    () => () => {
       // clear debounce on unmount
       debouncedHandleChangeSearch.cancel()
-    }
-  }, [])
+    },
+    [search]
+  )
 
   return {
     loading: data.loading,

@@ -7,7 +7,7 @@ const DEFAULT_CONFIG: AxiosRequestConfig = {
   // ... others config
 }
 
-export const useAxios = <T>(config: AxiosRequestConfig) => {
+export const useAxios = <T>(baseConfig: AxiosRequestConfig) => {
   const [response, setResponse] = useState<T>(undefined)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
@@ -16,7 +16,7 @@ export const useAxios = <T>(config: AxiosRequestConfig) => {
     try {
       const result = await axios.request<T, AxiosResponse<T>>({
         ...DEFAULT_CONFIG,
-        ...config,
+        ...baseConfig,
       })
       setResponse(result.data)
     } catch (err) {
@@ -24,7 +24,7 @@ export const useAxios = <T>(config: AxiosRequestConfig) => {
     } finally {
       setLoading(false)
     }
-  }, [config])
+  }, [baseConfig])
 
   return { fetchData, data: { response, error, loading } }
 }
