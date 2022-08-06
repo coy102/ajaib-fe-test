@@ -14,7 +14,6 @@ export const fontSize = {
 // Create a theme instance.
 const theme = createTheme({
   palette: {
-    mode: 'dark',
     primary: {
       main: '#556cd6',
     },
@@ -23,9 +22,6 @@ const theme = createTheme({
     },
     error: {
       main: red.A400,
-    },
-    background: {
-      default: '#13171d',
     },
   },
   typography: {
