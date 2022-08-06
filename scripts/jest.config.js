@@ -24,7 +24,7 @@ module.exports = {
       '<rootDir>/scripts/mocks/image.js',
   },
   coverageReporters: ['html', 'lcov', 'cobertura'],
-  // setupFiles: ['<rootDir>/tests/mocks.ts'],
+  setupFiles: ['<rootDir>/tests/mocks.ts'],
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|js?|tsx?|ts?)$',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$'],

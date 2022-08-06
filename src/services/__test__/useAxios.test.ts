@@ -2,9 +2,7 @@ import { act, renderHook } from '@testing-library/react-hooks'
 
 import mockAxios from 'jest-mock-axios'
 
-import { catchFn, finallyFn } from '~/tests/mocks'
-
-import { useAxios } from '../useAxios'
+import useAxios from '../useAxios'
 
 import {
   expectedEmptyResultHook,
@@ -33,7 +31,7 @@ describe('test useAxios', () => {
     const { result } = renderHook(() => useAxios(config))
 
     await act(async () => {
-      await result.current.fetchData().catch(catchFn).finally(finallyFn)
+      await result.current.fetchData()
     })
 
     expect(result.current).toEqual({
@@ -48,7 +46,7 @@ describe('test useAxios', () => {
     const { result } = renderHook(() => useAxios(config))
 
     await act(async () => {
-      await result.current.fetchData().catch(catchFn).finally(finallyFn)
+      await result.current.fetchData()
     })
 
     expect(result.current).toEqual({
