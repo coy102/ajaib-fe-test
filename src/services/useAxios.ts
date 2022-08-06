@@ -3,7 +3,7 @@ import { useState, useCallback } from 'react'
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 const DEFAULT_CONFIG: AxiosRequestConfig = {
-  baseURL: 'https://randomuser.me/',
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL_API,
   // ... others config
 }
 
