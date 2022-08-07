@@ -1,27 +1,25 @@
-# Next.js TypeScript Boilerplate
+# Frontend Test random users
 
-ZebraX Frontend Boilerplate using TypeScript, React, GraphQL, Apollo Client and Next.js
+using my custom boilerplate [https://github.com/coy102/next-ts-starter](https://github.com/coy102/next-ts-starter),
 
-## Prerequisites
-
-- [Yarn](https://yarnpkg.com/en/docs/install) v1.x.x
+[Live Demo](https://vercel.com/fajarsep12/ajaib-fe-test/DfCk57koc6K3XrQ7Hv9rUMpqcEby)
 
 ## Quick Start
 
-### Locally
+### Run Locally
 
 ```
-git clone https://github.com/zebraxid/next-ts-boilerplate
-cd next-ts-boilerplate
+git clone https://github.com/coy102/ajaib-fe-test
+cd ajaib-fe-test
 yarn install
 cp .env.example .env
 yarn start
 ```
 
-## Documentation
+```
+Replace env value
+NEXT_PUBLIC_BASE_URL_API=https://randomuser.me/
+```
 
-For more detailed documentation, check the [wiki pages here](https://github.com/zebraxid/next-ts-boilerplate/wiki)
-
-## Contributing
-
-Please check our [contributing guide](CONTRIBUTING.md).
+### Better Web Performance
+React useMemo, useCallback, and memo (component) to avoid rerendering and improve performance. Also using lazyLoad component (dynamic nextjs) to splitting the component. It's simple, but can be very useful.
