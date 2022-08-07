@@ -16,7 +16,7 @@ cp .env.example .env
 yarn start
 ```
 
-### Run Uni Test
+### Run Unit Test
 
 ```
 yarn test
