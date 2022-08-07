@@ -16,6 +16,13 @@ cp .env.example .env
 yarn start
 ```
 
+### Run Uni Test
+
+```
+yarn test
+yarn test:coverage
+```
+
 ```
 Replace env value
 NEXT_PUBLIC_BASE_URL_API=https://randomuser.me/
